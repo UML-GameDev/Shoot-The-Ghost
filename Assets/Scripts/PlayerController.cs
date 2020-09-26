@@ -22,11 +22,12 @@ public class PlayerController : MonoBehaviour
 
     private GameObject currentGround;
 
-    
+    private Collider2D myCollider;
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<Collider2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -69,21 +70,11 @@ public class PlayerController : MonoBehaviour
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
    private void checkGround()
     {
-        Vector3 rightCornerOffset = groundCheck.position + Vector3.right * transform.localScale.x/2;
-        Vector3 leftCornerOffset = groundCheck.position - Vector3.right * transform.localScale.x/2;
-
-        if(debug)
-        {
-            Debug.DrawRay(rightCornerOffset, -Vector3.up * .04f, Color.red, 3f);
-            Debug.DrawRay(leftCornerOffset, -Vector3.up * .04f, Color.red, 3f);
-        }
-
-
-        if(rb2d.velocity.y < 0 && (Physics2D.Raycast(rightCornerOffset, -Vector3.up, 0.04f, groundMask) ||
-        Physics2D.Raycast(leftCornerOffset, -Vector3.up, 0.04f, groundMask)))
+        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
+        if(rb2d.velocity.y < 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
-        }        
+        }    
     }
 
     //flip the player based on the direction of player moving (can't really see that rn because it's just a rectangle with flat color)
