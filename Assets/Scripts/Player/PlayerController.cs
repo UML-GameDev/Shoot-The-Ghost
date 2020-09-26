@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
     
 
     //Related to Checking Ground when Player Jump
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundMask;
+    public Transform groundCheck;
+    public LayerMask groundMask;
 
     private Rigidbody2D rb2d;
 
     private Vector3 currentVel = Vector3.zero;
-    private bool facingRight = true;
+    //private bool facingRight = true;
 
     private bool onGround = true;
     private const float groundCheckRadius = .2f;
@@ -51,10 +51,10 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity,newVel,ref currentVel,smoothTime);
         }
 
-        if ((h_input > 0 && !facingRight) || (h_input < 0 && facingRight))
-        {
-            Flip();
-        }
+        //if ((h_input > 0 && !facingRight) || (h_input < 0 && facingRight))
+        //{
+        //    Flip();
+       //}
 
         if (onGround && isJump)
         {
@@ -78,14 +78,14 @@ public class PlayerController : MonoBehaviour
     }
 
     //flip the player based on the direction of player moving (can't really see that rn because it's just a rectangle with flat color)
-    private void Flip()
-    {
+    //private void Flip()
+    //{
         // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
+     //   facingRight = !facingRight;
 
         // Multiply the player's x local scale by -1.
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
+     //   Vector3 theScale = transform.localScale;
+     //   theScale.x *= -1;
+     //   transform.localScale = theScale;
+   //}
 }
