@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+        Debug.Log(onGround);
         if (onGround && isJump)
         {
             onGround = false;
