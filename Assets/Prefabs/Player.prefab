@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 797253603657886060}
   - component: {fileID: 797253603657886057}
   - component: {fileID: 4413899464903814006}
-  - component: {fileID: 797253603657886062}
+  - component: {fileID: 7315828658552870048}
   - component: {fileID: 1303487491316916051}
   - component: {fileID: 3895040742208418669}
   m_Layer: 0
@@ -53,6 +53,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -135,7 +136,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 6.5}
   m_EdgeRadius: 0
---- !u!114 &797253603657886062
+--- !u!114 &7315828658552870048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,16 +145,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 797253603657886066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbebb50305563e649897bf8f3b16ed30, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ef3a1a0bb7eb604e8160ecc1c8d8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 40
-  JumpForce: 10
-  smoothTime: 0.152
-  groundCheck: {fileID: 797253604143419449}
+  maxSpeed: 12
+  smoothTime: 0.3
+  debug: 1
+  initialJumpVelo: 10
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  groundCheck: {fileID: 797253604143419449}
 --- !u!114 &1303487491316916051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +262,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -404,6 +407,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -485,6 +489,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
