@@ -8,23 +8,10 @@ public class Bullet : MonoBehaviour
     public BulletData bulletData;
 
     float lifeTimer = 0;
-    Vector3 mousePosition;
-    Vector2 direction;
-
-    public void AimAtCursor()
-    {
-        // I don't think i need this method
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        direction = new Vector2(
-            mousePosition.x, mousePosition.y);
-    }
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        AimAtCursor();
         lifeTimer = bulletData.lifeDuration;
     }
 
