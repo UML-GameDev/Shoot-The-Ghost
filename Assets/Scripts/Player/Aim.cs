@@ -26,6 +26,7 @@ public class Aim : MonoBehaviour
 
     }
     
+
     public void AimAtCursor()
     {
         // Sets mousePosition to the mouse cursors position, direction to the position of the player's arm
@@ -37,7 +38,6 @@ public class Aim : MonoBehaviour
         // Finds the angle at which the gun should be pointing by taking the inverse tangent of mousePositiony over mousePositionx, converts to degrees
         gunAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        Debug.Log(gunAngle);
 
         float dp = Vector3.Dot(Vector3.right, direction.normalized);
 
@@ -52,7 +52,6 @@ public class Aim : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
             phaseAngle = 0;
 
-            pivot.eulerAngles = new Vector3(pivot.eulerAngles.x, pivot.eulerAngles.y, gunAngle);
             secondaryArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
 
