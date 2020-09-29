@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
    private void checkGround()
     {
         var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
-        if(rb2d.velocity.y <= 0 && collider != null && collider != myCollider)
+        if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
         }    
