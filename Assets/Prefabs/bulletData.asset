@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1326145264e324c9cfbfebd7177dc6, type: 3}
   m_Name: bulletData
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   bulletSpeed: 10
   lifeDuration: 3
+=======
+  bulletSpeed: 25
+  lifeDuration: 2
+  bulletDamage: 10
+>>>>>>> UML_STG/master

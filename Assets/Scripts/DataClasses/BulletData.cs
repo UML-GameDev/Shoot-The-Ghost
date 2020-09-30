@@ -8,4 +8,5 @@ public class BulletData : ScriptableObject
 {
     public float bulletSpeed = 1f;
     public float lifeDuration = 2f;
+    public float bulletDamage = 10f;
 }

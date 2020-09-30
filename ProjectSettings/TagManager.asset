@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Platform
+=======
+  - Bullet
+  - Enemy
+>>>>>>> UML_STG/master
   layers:
   - Default
   - TransparentFX
