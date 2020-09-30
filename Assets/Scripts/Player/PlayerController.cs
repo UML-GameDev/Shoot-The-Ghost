@@ -52,12 +52,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.contactCount);
+        ContactPoint2D contact = collision.GetContact(0);
+        print(contact.collider.gameObject.name);
+
+        var collObj = collision.gameObject;
+
+        if(collObj.tag == "Platform" && Vector3.Dot(transform.up, contact.normal) > 0.3)
+        {
+            transform.parent = collObj.transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        var collObj = collision.gameObject;
+        
+        if(collObj.tag == "Platform")
+        {
+            transform.parent = null;
+        }
+    }
 
     
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
    private void checkGround()
     {
-        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
+        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0, groundMask);
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
