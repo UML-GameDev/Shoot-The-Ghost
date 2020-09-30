@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     public float initialJumpVelo = 10f;
 
 
-    public LayerMask groundMask;
+    public LayerMask[] nonJumpableLayers;
+    int finalMask = 0;
+
     public Transform groundCheck;
     private Rigidbody2D rb2d;
 
@@ -22,12 +24,21 @@ public class PlayerController : MonoBehaviour
     private GameObject currentGround;
 
     private Collider2D myCollider;
+
     // Start is called before the first frame update
     void Start()
     {
         myCollider = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
+
+        for(int i = 0; i < nonJumpableLayers.Length; i++)
+        {
+            finalMask |= 1 << nonJumpableLayers[i];
+        }
+
+        finalMask = ~finalMask;
     }
+
     private void FixedUpdate()
     {
        move();
@@ -54,13 +65,11 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.contactCount);
         ContactPoint2D contact = collision.GetContact(0);
-        print(contact.collider.gameObject.name);
-
         var collObj = collision.gameObject;
+        
 
-        if(collObj.tag == "Platform" && Vector3.Dot(transform.up, contact.normal) > 0.3)
+        if(collObj.layer == LayerMask.NameToLayer("Platform") && Vector3.Dot(transform.up, contact.normal) > 0.3)
         {
             transform.parent = collObj.transform;
         }
@@ -70,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         var collObj = collision.gameObject;
         
-        if(collObj.tag == "Platform")
+        if(collObj.layer == LayerMask.NameToLayer("Platform"))
         {
             transform.parent = null;
         }
@@ -80,7 +89,7 @@ public class PlayerController : MonoBehaviour
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
    private void checkGround()
     {
-        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0, groundMask);
+        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0, finalMask);
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
