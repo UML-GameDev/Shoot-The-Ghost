@@ -58,8 +58,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
    private void checkGround()
     {
@@ -70,12 +68,14 @@ public class PlayerController : MonoBehaviour
         }    
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Enemy"))
-        {
-            currHealth -= collision.GetComponent<BasicEnemy>().damage;
-            healthBar.transform.localScale -= new Vector3(collision.GetComponent<BasicEnemy>().damage / 100f, 0f, 0f);
-        }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        //player takes damage
+        if(collision.CompareTag("Enemy")&& currHealth >= 0)
+        {
+            float damage = collision.GetComponent<BasicEnemy>().damage;
+            currHealth -= damage;
+            healthBar.transform.localScale -= new Vector3(damage / 100f, 0f, 0f);
+        }
     }
 }
