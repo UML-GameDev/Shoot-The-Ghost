@@ -1,3 +1,4 @@
+
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public float smoothTime = 0.3f;
     public bool debug = true;
     public float initialJumpVelo = 10f;
+
+    float currHealth;
+    public float maxHealth = 100f;
+    public GameObject healthBar;
 
 
     public LayerMask groundMask;
@@ -27,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         myCollider = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
+        currHealth = maxHealth;
     }
     private void FixedUpdate()
     {
@@ -62,5 +68,14 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }    
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            currHealth -= collision.GetComponent<BasicEnemy>().damage;
+            healthBar.transform.localScale -= new Vector3(collision.GetComponent<BasicEnemy>().damage / 100f, 0f, 0f);
+        }
     }
 }

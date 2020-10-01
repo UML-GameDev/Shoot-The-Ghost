@@ -6,6 +6,7 @@ public class BasicEnemy : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currHealth;
+    public float damage = 15f;
 
     public GameObject healthBar;
     
