@@ -1,3 +1,4 @@
+
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -69,12 +70,12 @@ public class PlayerController : MonoBehaviour
         }    
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Enemy"))
-        {
-            currHealth -= collision.GetComponent<BasicEnemy>().damage;
-            healthBar.transform.localScale -= new Vector3(collision.GetComponent<BasicEnemy>().damage / 100f, 0f, 0f);
-        }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            currHealth -= collision.GetComponent<BasicEnemy>().damage;
+            healthBar.transform.localScale -= new Vector3(collision.GetComponent<BasicEnemy>().damage / 100f, 0f, 0f);
+        }
     }
 }
