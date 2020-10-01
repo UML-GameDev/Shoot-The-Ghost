@@ -875,10 +875,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8904050843577899866, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904050844981171512, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904050844981171512, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8904050845252646139, guid: 8328bb007d40cb0418c49c3a7274e9c9,
         type: 3}
       propertyPath: m_Name
       value: PlatformGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904050845252646139, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904050845252646139, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8904050845252646140, guid: 8328bb007d40cb0418c49c3a7274e9c9,
         type: 3}
@@ -934,6 +959,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904050845420683902, guid: 8328bb007d40cb0418c49c3a7274e9c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8328bb007d40cb0418c49c3a7274e9c9, type: 3}
