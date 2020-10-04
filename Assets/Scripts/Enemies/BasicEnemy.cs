@@ -1,34 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class BasicEnemy : MonoBehaviour
+[System.Serializable]
+public class BasicEnemy : MonoBehaviour, HealthUpdatable
 {
     public float maxHealth = 100f;
-    public float currHealth;
     public float damage = 15f;
+    public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
+    public float currHealth { get; set; }     
+    public float attackRate = 0.5f;	    
+    public float attackTimer;
 
-    public GameObject healthBar;
-    
     // Start is called before the first frame update
     void Start()
     {
         currHealth = maxHealth;
+        attackTimer = attackRate;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (currHealth <= 0) BoxCollider2D.Destroy(gameObject);
-
     }
 
+    public void TakeDamage(float damage)
+    {
+        currHealth = (currHealth >= damage) ? currHealth - damage : 0;
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var collObj = collision.gameObject;
+
         if (collision.CompareTag("Bullet"))
         {
-            currHealth -= collision.GetComponent<Bullet>().bulletData.bulletDamage;
-            healthBar.transform.localScale -= new Vector3(collision.GetComponent<Bullet>().bulletData.bulletDamage / 100f, 0f, 0f);
+            float damage = collObj.GetComponent<Bullet>().bulletData.bulletDamage;
+
+            TakeDamage(damage);
+            OnHealthUpdated.Invoke(currHealth);
         }
     }
 
