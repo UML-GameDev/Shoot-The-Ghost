@@ -5,9 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
 
-
 [System.Serializable]
-
 public class PlayerController : MonoBehaviour, HealthUpdatable
 {
     public InputManager input;
@@ -45,6 +43,16 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
 
     Scene currScene;
 
+    void OnEnable(){
+        input.moveEvent += MoveVector;
+        input.jumpEvent += Jump;
+    }
+
+    void OnDisable(){
+        input.moveEvent -= MoveVector;
+        input.jumpEvent -= Jump;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,16 +67,18 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         
         regenTimer = regenDelay;
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        move();
-        if (!onGround) checkGround();
-        
-        if (currHealth <= 0) SceneManager.LoadScene(currScene.name); // Resets the scene if currHealth reaches 0
+        if(velVec != 0) Move();
+        if (!onGround) CheckGround();
 
+        if (currHealth <= 0) SceneManager.LoadScene(currScene.name); // Resets the scene if currHealth reaches 
         if (regenTimer >= 0) regenTimer -= Time.fixedDeltaTime; // Regen timer
         if (regenTimer <= 0 && currHealth < maxHealth) RegenHealth();
-
+    }
+    void Move(){
+        Vector3 newVel = new Vector3(velVec*maxSpeed,rb2d.velocity.y);
+        rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity,newVel,ref currentVel,smoothTime);
     }
     // Player regenerates health when they haven't taken damage within a set period of time
     void RegenHealth ()
@@ -87,25 +97,9 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
             currHealth = maxHealth;
         }
     }
-
-    //basic movement
-    void Move(Vector2 input)
-    {
-        velVec = input.x;
-    }
-
-    void Jump(){
-        if (onGround)
-        {
-            onGround = false;
-            rb2d.AddForce(new Vector2(0f, initialJumpVelo), ForceMode2D.Impulse);
-        }
-    }
-
-
     
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
-   private void CheckGround()
+    void CheckGround()
     {
         var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
@@ -132,4 +126,20 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         }
         
     }
+
+    //Event function for InputManager
+        //basic movement
+    void MoveVector(Vector2 input)
+    {
+        velVec = input.x;
+    }
+
+    void Jump(){
+        if (onGround)
+        {
+            onGround = false;
+            rb2d.AddForce(new Vector2(0f, initialJumpVelo), ForceMode2D.Impulse);
+        }
+    }
+
 }

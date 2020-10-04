@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 797253603657886057}
   - component: {fileID: 4413899464903814006}
   - component: {fileID: 459039567}
-  - component: {fileID: 459039568}
+  - component: {fileID: 459039572}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -341,13 +341,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 797253603657886066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4a922f59b9bc742bf151752db7500d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ef3a1a0bb7eb604e8160ecc1c8d8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 16
+  input: {fileID: 0}
+  maxSpeed: 12
   smoothTime: 0.3
   debug: 1
-  initialJumpVelo: 20
+  initialJumpVelo: 10
   maxHealth: 100
   healthBar: {fileID: 1724667846}
   regenDelay: 1
@@ -356,7 +357,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheck: {fileID: 797253604143419449}
---- !u!114 &459039568
+--- !u!114 &459039572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,52 +366,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 797253603657886066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 54e5dd97710d0b543a3af1193a737401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7358fb81a9813384f8d2916de10a7828,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: 4ef3a1a0bb7eb604e8160ecc1c8d8e3e, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3b956fc5-6010-46bd-9a1a-ed9a45c8dcff
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8286b104-f6be-4b8e-8318-3b2ab3c44b9e
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5982e300-4188-44ab-b9ef-33987cc03c4c
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  input: {fileID: 0}
+  barrelTransform: {fileID: 8505148686809139109}
+  pivot: {fileID: 2435204950920002466}
+  primaryArm: {fileID: 12918675639620583}
+  secondaryArm: {fileID: 987336237515611119}
 --- !u!1 &797253604143419454
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918231241699773260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.71, y: -0.46, z: 2.1767578}
+  m_LocalPosition: {x: 1.71, y: 0, z: 2.1767578}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8505148686809139109}

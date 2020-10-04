@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
     GameInput gameInput;
 
     void OnEnable(){
-        //singleton design (only create one instance of this object)
+        //(only create one instance of this object)
         if(gameInput == null){
             gameInput = new GameInput();
             gameInput.Player.SetCallbacks(this);
