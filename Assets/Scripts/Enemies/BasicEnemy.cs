@@ -9,9 +9,10 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     public float maxHealth = 100f;
     public float damage = 15f;
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
-    public float currHealth { get; set; }
+    public float currHealth { get; set; }     
+    public float attackRate = 0.5f;	    
+    public float attackTimer;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,6 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     void Update()
     {
         if (currHealth <= 0) BoxCollider2D.Destroy(gameObject);
-
     }
 
     public void TakeDamage(float damage)

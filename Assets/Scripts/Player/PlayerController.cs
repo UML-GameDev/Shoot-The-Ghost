@@ -19,14 +19,15 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     public float currHealth { get; set; }
     public float maxHealth = 100f;
     public GameObject healthBar;
-    Vector3 healthBarSize;
-    Vector3 healthBarPosition;
     public float regenDelay = 1f;
-    float regenTimer;
     public float regenRate = 5f;
 
+    Vector3 healthBarSize;
+    Vector3 healthBarPosition;
+    
+    float regenTimer;
+    
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
-
 
     public LayerMask groundMask;
     public Transform groundCheck;
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     private GameObject currentGround;
 
     private Collider2D myCollider;
+
+    Scene currScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,9 +83,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
             healthBar.transform.localScale = new Vector3(healthBarSize.x, healthBarSize.y, healthBarSize.z);
             healthBar.transform.localPosition = new Vector3(healthBarPosition.x, healthBarPosition.y, healthBarPosition.z);
             currHealth = maxHealth;
-            
         }
-        
     }
 
     //basic movement
@@ -123,7 +125,6 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     {
         //player takes damage
         var collObj = collision.gameObject;
-
         if(collObj.layer == LayerMask.NameToLayer("Enemy"))
         {
             float damage = collObj.GetComponent<BasicEnemy>().damage;
