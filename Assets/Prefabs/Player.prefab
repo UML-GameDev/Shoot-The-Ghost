@@ -208,8 +208,8 @@ GameObject:
   - component: {fileID: 797253603657886060}
   - component: {fileID: 797253603657886057}
   - component: {fileID: 4413899464903814006}
-  - component: {fileID: 7315828658552870048}
-  - component: {fileID: 3895040742208418669}
+  - component: {fileID: 459039567}
+  - component: {fileID: 459039572}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -332,7 +332,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 6.5}
   m_EdgeRadius: 0
---- !u!114 &7315828658552870048
+--- !u!114 &459039567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -344,10 +344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef3a1a0bb7eb604e8160ecc1c8d8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 16
+  input: {fileID: 0}
+  maxSpeed: 12
   smoothTime: 0.3
   debug: 1
-  initialJumpVelo: 20
+  initialJumpVelo: 10
   maxHealth: 100
   healthBar: {fileID: 1724667846}
   regenDelay: 1
@@ -356,7 +357,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheck: {fileID: 797253604143419449}
---- !u!114 &3895040742208418669
+--- !u!114 &459039572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e5dd97710d0b543a3af1193a737401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 0}
   barrelTransform: {fileID: 8505148686809139109}
   pivot: {fileID: 2435204950920002466}
   primaryArm: {fileID: 12918675639620583}
@@ -427,7 +429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918231241699773260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.71, y: -0.46, z: 2.1767578}
+  m_LocalPosition: {x: 1.71, y: 0, z: 2.1767578}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8505148686809139109}

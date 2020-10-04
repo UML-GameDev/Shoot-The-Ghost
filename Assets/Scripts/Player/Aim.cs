@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
+    public InputManager input;
     Vector3 mousePosition;
     Vector3 direction;
 
     float gunAngle;
 
+    bool holding = false;
     float time;
 
     public Transform barrelTransform;
@@ -21,17 +19,20 @@ public class Aim : MonoBehaviour
 
     float phaseAngle;
 
-    public void Start()
-    {
-
+    void OnEnable(){
+        input.lookEvent += AimAtCursor;
+        input.attackEvent += ShootState;
     }
-    
 
-    public void AimAtCursor()
+    void OnDiable(){
+        input.lookEvent -= AimAtCursor;
+        input.attackEvent = null;
+    }
+
+    void AimAtCursor(Vector2 mp)
     {
         // Sets mousePosition to the mouse cursors position, direction to the position of the player's arm
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(mp);
         // Finds the distance between the mouse cursor and the player's arm
         Vector3 direction = mousePosition - pivot.position;
         
@@ -56,40 +57,28 @@ public class Aim : MonoBehaviour
         }
 
         pivot.eulerAngles = new Vector3(pivot.eulerAngles.x, pivot.eulerAngles.y, Mathf.Sign(dp) * (gunAngle + phaseAngle));
-
-
-        //
-
     }
 
-    public void ShootBullet() {
-            // Calls Poolmanager to instantiate a bullet
-            GameObject bulletObject = PoolManager.Instance.GetBullet();
-            // Sets bullet rotation to be nearly equal to the barrel rotation, with a random offset between -10 degrees and 10 degrees
-            bulletObject.transform.rotation = barrelTransform.rotation * Quaternion.Euler(0, 0, Random.Range(-10, 10));
-            bulletObject.transform.position = barrelTransform.position + barrelTransform.right;
-            time = 0;
+     void ShootBullet() {
+        // Calls Poolmanager to instantiate a bullet
+        GameObject bulletObject = PoolManager.Instance.GetBullet();
+        // Sets bullet rotation to be nearly equal to the barrel rotation, with a random offset between -10 degrees and 10 degrees
+        bulletObject.transform.rotation = barrelTransform.rotation * Quaternion.Euler(0, 0, Random.Range(-10, 10));
+        bulletObject.transform.position = barrelTransform.position + barrelTransform.right;  
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        AimAtCursor();
-
-        if(Input.GetMouseButtonDown(0)) {
-            // Player can still shoot by repeatedly clicking lmb
+    void Update(){
+        if(holding){
+            if (time >= .25){     
             ShootBullet();
-        }
-
-        if (Input.GetMouseButton(0)) {
-            // Gun has a set firerate when the player holds down the left mouse button
-            time += Time.deltaTime;
-
-            if (time >= .25)
-            {
-                ShootBullet();               
+            time = 0;
             }
+            time += Time.deltaTime;
         }
-        
+    }
+
+    void ShootState(bool hold){
+        holding = hold;
+        time = .30f;
     }
 }
