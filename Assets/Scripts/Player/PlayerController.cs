@@ -1,9 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
+
 using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+
+[System.Serializable]
+
+public class PlayerController : MonoBehaviour, HealthUpdatable
 {
     //Related to Speed of Player Movement and Jumping
     public float maxSpeed = 12;
@@ -11,8 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool debug = true;
     public float initialJumpVelo = 10f;
 
-    //Related to Player Health and Regeneration rate
-    float currHealth;
+    public float currHealth { get; set; }
     public float maxHealth = 100f;
     public GameObject healthBar;
     Vector3 healthBarSize;
@@ -21,7 +25,8 @@ public class PlayerController : MonoBehaviour
     float regenTimer;
     public float regenRate = 5f;
 
-    Scene currScene;
+    public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
+
 
     public LayerMask groundMask;
     public Transform groundCheck;
@@ -108,28 +113,23 @@ public class PlayerController : MonoBehaviour
             onGround = true;
         }    
     }
-    //This is for when enemy shooting is added
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public void TakeDamage(float damage)
     {
-        
+        currHealth = (currHealth >= damage) ? currHealth - damage : 0;
     }
-    
-    float enemyDamage;
-    private void OnCollisionStay2D(Collision2D collision)
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if(collision.gameObject.CompareTag("Enemy"))
+        //player takes damage
+        var collObj = collision.gameObject;
+
+        if(collObj.layer == LayerMask.NameToLayer("Enemy"))
         {
-            enemyDamage = collision.gameObject.GetComponent<BasicEnemy>().damage;
-            if (collision.gameObject.GetComponent<BasicEnemy>().attackTimer <= 0) // Player takes damage whenever the enemies attackTimer reaches 0 during a collision
-            {
-                currHealth -= enemyDamage;
-                healthBar.transform.localScale -= new Vector3(enemyDamage / 100f * healthBarSize.x, 0f, 0f); // Lowers healthbar
-                healthBar.transform.localPosition -= new Vector3(enemyDamage / 100f * healthBarSize.x / 2, 0f, 0f);
-                collision.gameObject.GetComponent<BasicEnemy>().attackTimer = collision.gameObject.GetComponent<BasicEnemy>().attackRate; // Resets attackTimer
-            }
-            collision.gameObject.GetComponent<BasicEnemy>().attackTimer -= Time.deltaTime; // Lowers attackTimer
-            regenTimer = regenDelay; // Resets regenTimer
+            float damage = collObj.GetComponent<BasicEnemy>().damage;
+            
+            TakeDamage(damage);
+            OnHealthUpdated.Invoke(currHealth);
         }
         
     }
