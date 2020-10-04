@@ -16,6 +16,7 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     void Start()
     {
         currHealth = maxHealth;
+        attackTimer = attackRate;
     }
 
     // Update is called once per frame
