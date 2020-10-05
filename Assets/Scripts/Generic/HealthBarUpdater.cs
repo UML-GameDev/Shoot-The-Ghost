@@ -13,6 +13,10 @@ public class HealthBarUpdater : MonoBehaviour
     }
     void updateHealth(float currHealth)
     {
-        transform.localScale = new Vector3((currHealth / 100f) * initHealthScaleX, transform.localScale.y, 0);
+        float newScaleX = (currHealth / 100f) * initHealthScaleX;
+        float scaleDelta = newScaleX - transform.localScale.x;
+
+        transform.localScale = new Vector3(newScaleX, transform.localScale.y, 0);
+        transform.position += new Vector3(scaleDelta/2, 0, 0);
     }
 }
