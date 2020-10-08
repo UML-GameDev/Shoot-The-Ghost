@@ -60,11 +60,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         myCollider = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         currHealth = maxHealth;
-        
-        // The original dimensions of the healthbar, used in RegenHealth
-        healthBarSize = new Vector3(healthBar.transform.localScale.x, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
-        healthBarPosition = new Vector3(healthBar.transform.localPosition.x, healthBar.transform.localPosition.y, healthBar.transform.localPosition.z);
-        
+            
         regenTimer = regenDelay;
     }
     void FixedUpdate()
@@ -81,21 +77,12 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity,newVel,ref currentVel,smoothTime);
     }
     // Player regenerates health when they haven't taken damage within a set period of time
-    void RegenHealth ()
+    void RegenHealth()
     {
-        if (currHealth + regenRate <= maxHealth) 
-        { 
-            currHealth += regenRate * Time.deltaTime;
-            healthBar.transform.localScale += new Vector3(regenRate * Time.deltaTime / 100f * healthBarSize.x, 0f, 0f);
-            healthBar.transform.localPosition += new Vector3(regenRate * Time.deltaTime / 100f * healthBarSize.x / 2, 0f, 0f);
-        } 
-        else 
-        {
-            // Fills the health bar and health when the player has reached a high enough currHealth
-            healthBar.transform.localScale = new Vector3(healthBarSize.x, healthBarSize.y, healthBarSize.z);
-            healthBar.transform.localPosition = new Vector3(healthBarPosition.x, healthBarPosition.y, healthBarPosition.z);
-            currHealth = maxHealth;
-        }
+        float regenAmt = regenRate * Time.deltaTime;
+        currHealth = (currHealth + regenAmt <= maxHealth) ? currHealth + regenAmt : maxHealth;
+
+        OnHealthUpdated.Invoke(currHealth);
     }
     
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
