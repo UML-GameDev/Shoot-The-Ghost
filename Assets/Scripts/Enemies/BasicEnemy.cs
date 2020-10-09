@@ -8,7 +8,9 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
 {
     public float maxHealth = 100f;
     public float damage = 15f;
+    
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
+    
     public float currHealth { get; set; }     
     public float attackRate = 0.5f;	    
     public float attackTimer;
