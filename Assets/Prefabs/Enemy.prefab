@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 2566723097961117520}
+  healthBarTrans: {fileID: 2566723097961117532}
 --- !u!212 &2566723097272038726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -321,7 +322,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
 --- !u!50 &2566723097961117533
 Rigidbody2D:
