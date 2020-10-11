@@ -89,12 +89,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
-            Debug.Log("is onground");
             onGround = true;
-        }
-        else
-        {
-            Debug.Log("ground set to false");
         }
     }
 
