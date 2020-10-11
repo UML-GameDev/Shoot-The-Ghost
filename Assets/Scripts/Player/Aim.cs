@@ -25,6 +25,10 @@ public class Aim : MonoBehaviour
         input.lookEvent -= AimAtCursor;
     }
 
+    void OnDestroy()
+    {
+        input.lookEvent -= AimAtCursor;
+    }
     void AimAtCursor(Vector2 mp)
     {
         // Sets mousePosition to the mouse cursors position, direction to the position of the player's arm

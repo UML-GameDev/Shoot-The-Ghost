@@ -21,9 +21,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     public float regenDelay = 1f;
     public float regenRate = 5f;
 
-    Vector3 healthBarSize;
-    Vector3 healthBarPosition;
-    
+
     float regenTimer;
     
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
@@ -91,8 +89,13 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
+            Debug.Log("is onground");
             onGround = true;
-        }    
+        }
+        else
+        {
+            Debug.Log("ground set to false");
+        }
     }
 
     public void TakeDamage(float damage)
