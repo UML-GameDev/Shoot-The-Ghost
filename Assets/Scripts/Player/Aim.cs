@@ -8,8 +8,6 @@ public class Aim : MonoBehaviour
 
     float gunAngle;
 
-    bool holding = false;
-    float time;
 
     public Transform barrelTransform;
     public Transform pivot;
@@ -21,12 +19,10 @@ public class Aim : MonoBehaviour
 
     void OnEnable(){
         input.lookEvent += AimAtCursor;
-        input.attackEvent += ShootState;
     }
 
     void OnDiable(){
         input.lookEvent -= AimAtCursor;
-        input.attackEvent = null;
     }
 
     void AimAtCursor(Vector2 mp)
@@ -57,28 +53,5 @@ public class Aim : MonoBehaviour
         }
 
         pivot.eulerAngles = new Vector3(pivot.eulerAngles.x, pivot.eulerAngles.y, Mathf.Sign(dp) * (gunAngle + phaseAngle));
-    }
-
-     void ShootBullet() {
-        // Calls Poolmanager to instantiate a bullet
-        GameObject bulletObject = PoolManager.Instance.GetBullet();
-        // Sets bullet rotation to be nearly equal to the barrel rotation, with a random offset between -10 degrees and 10 degrees
-        bulletObject.transform.rotation = barrelTransform.rotation * Quaternion.Euler(0, 0, Random.Range(-10, 10));
-        bulletObject.transform.position = barrelTransform.position + barrelTransform.right;  
-    }
-
-    void Update(){
-        if(holding){
-            if (time >= .25){     
-            ShootBullet();
-            time = 0;
-            }
-            time += Time.deltaTime;
-        }
-    }
-
-    void ShootState(bool hold){
-        holding = hold;
-        time = .30f;
     }
 }
