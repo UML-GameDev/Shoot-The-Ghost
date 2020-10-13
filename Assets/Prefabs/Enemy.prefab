@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566723097272038724}
-  - component: {fileID: 2566723097272038725}
   - component: {fileID: 2566723097272038726}
   m_Layer: 0
   m_Name: HealthBar
@@ -32,20 +31,6 @@ Transform:
   m_Father: {fileID: 2566723097788582861}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2566723097272038725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2566723097272038714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdac8cf55fb36bd408e71475aee3c021, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 2566723097961117520}
-  healthBarTrans: {fileID: 2566723097961117532}
 --- !u!212 &2566723097272038726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -188,6 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566723097788582861}
+  - component: {fileID: 1630848452}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -211,6 +197,20 @@ Transform:
   m_Father: {fileID: 2566723097961117532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630848452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566723097788582860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdac8cf55fb36bd408e71475aee3c021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2566723097961117520}
+  healthBarTrans: {fileID: 2566723097272038724}
 --- !u!1 &2566723097961117520
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 2566723097961117534}
   m_Layer: 10
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,5 +373,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15973f496e7330942979ab26cd388a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.4
+  speed: 0
   delta: 20

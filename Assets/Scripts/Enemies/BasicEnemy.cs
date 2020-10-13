@@ -31,19 +31,29 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     public void TakeDamage(float damage)
     {
         currHealth = (currHealth >= damage) ? currHealth - damage : 0;
+        OnHealthUpdated.Invoke(currHealth);
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var collObj = collision.gameObject;
 
+        bool tookDamage = false;
+        float damage = 0f;
+        Debug.Log(collObj.tag);
         if (collision.CompareTag("Bullet"))
         {
-            float damage = collObj.GetComponent<Bullet>().bulletData.bulletDamage;
-
-            TakeDamage(damage);
-            OnHealthUpdated.Invoke(currHealth);
+            damage = collObj.GetComponent<Bullet>().bulletData.bulletDamage;
+            tookDamage = true;
         }
-    }
+        else if(collision.CompareTag("Throwable"))
+        {
+            damage = collObj.GetComponent<Throwable>().throwableData.damage;
+            tookDamage = true;
+        }
 
+        if(!tookDamage) return;
+
+        TakeDamage(damage);
+    }
 }

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adee92437732885448f3d305d3f71066, type: 3}
-  m_Name: ARGunData
+  m_Script: {fileID: 11500000, guid: 587b43d6fb1d58c4a95156fa4f098ead, type: 3}
+  m_Name: GrenadeData
   m_EditorClassIdentifier: 
-  fireRate: 0
-  maxAmmo: 0
-  reloadTime: 0
+  throwForce: {x: 500, y: 250}
+  lifeDuration: 3
+  damage: 40
+  effectRadius: 5
