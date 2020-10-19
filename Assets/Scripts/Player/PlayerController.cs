@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
 
     public float currHealth { get; set; }
     public float maxHealth = 100f;
-    public GameObject healthBar;
+
     public float regenDelay = 1f;
     public float regenRate = 5f;
 
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     private bool onGround = false;
 
     private GameObject currentGround;
+
 
     private Collider2D myCollider;
 

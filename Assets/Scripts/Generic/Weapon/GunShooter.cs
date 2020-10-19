@@ -9,7 +9,7 @@ public class GunShooter : Shooter<GunData>
     float currReloadTime;
     int currAmmo;
     GunState gunState;
-
+ 
 
     void Start()
     {
@@ -32,10 +32,13 @@ public class GunShooter : Shooter<GunData>
         }
     }
 
+
     public override void Shoot()
     {
+
         if(currAmmo > 0)
         {
+
             currAmmo -= 1;
 
             GameObject bulletObject = PoolManager.Instance.GetBullet();
