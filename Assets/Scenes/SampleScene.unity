@@ -677,13 +677,20 @@ MonoBehaviour:
   - {fileID: 1870434410}
   - {fileID: 388264263}
   - {fileID: 2042354705}
-  actions:
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
+--- !u!114 &493196982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493196974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f909f4d06465f8447a5e858f7e9ae9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shooterData: {fileID: 11400000, guid: 937dfd47c1178f34bb5ce0cf033c0e19, type: 2}
+  input: {fileID: 311650856}
 --- !u!1 &507475891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2566723097961117520, guid: 234109d2c53372e4eb18252c8f212f48,
@@ -1100,7 +1107,7 @@ GameObject:
   - component: {fileID: 868099385}
   - component: {fileID: 868099384}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1193,20 +1200,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1992023584}
     m_Modifications:
-    - target: {fileID: 1268358712135912424, guid: 084a88d62e506414a80dcbd85d018b0f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151820133458242312, guid: 084a88d62e506414a80dcbd85d018b0f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2151820133458242312, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
       propertyPath: m_Name
-      value: Border1
+      value: Border
       objectReference: {fileID: 0}
     - target: {fileID: 4415867460844616673, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
@@ -1317,7 +1314,7 @@ PrefabInstance:
     - target: {fileID: 4415867460976766235, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -76.1
+      value: -75.1
       objectReference: {fileID: 0}
     - target: {fileID: 4415867460976766235, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
@@ -1602,7 +1599,7 @@ PrefabInstance:
     - target: {fileID: 2151820133458242312, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
       propertyPath: m_Name
-      value: Border2
+      value: Border
       objectReference: {fileID: 0}
     - target: {fileID: 4415867460844616673, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
@@ -1898,7 +1895,7 @@ PrefabInstance:
     - target: {fileID: 2151820133458242312, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
       propertyPath: m_Name
-      value: Border3
+      value: Border
       objectReference: {fileID: 0}
     - target: {fileID: 4415867460844616673, guid: 084a88d62e506414a80dcbd85d018b0f,
         type: 3}
@@ -3269,7 +3266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryM: {fileID: 970400304}
-  items:
+  itemsBorder:
   - {fileID: 241107705}
   - {fileID: 1509355430}
   - {fileID: 1163340244}

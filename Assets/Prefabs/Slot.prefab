@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4089180590721731488}
   - component: {fileID: 1268358712135912424}
   m_Layer: 5
-  m_Name: Border
+  m_Name: Border1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 4415867460976766235}
   - component: {fileID: 4415867460976766233}
   - component: {fileID: 4415867460976766232}
+  - component: {fileID: 5487004476251781594}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -227,3 +228,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &5487004476251781594
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415867460976766234}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2462c3b181963e45a32504761f9e034, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

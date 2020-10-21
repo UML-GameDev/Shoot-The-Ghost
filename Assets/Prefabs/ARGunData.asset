@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adee92437732885448f3d305d3f71066, type: 3}
   m_Name: ARGunData
   m_EditorClassIdentifier: 
-  fireRate: 0
-  maxAmmo: 0
-  reloadTime: 0
+  fireRate: 10
+  maxAmmo: 30
+  reloadTime: 5

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
     public UnityAction<Vector2> moveEvent;
     public UnityAction<Vector2> lookEvent; //aim
     public UnityAction jumpEvent;
-    public UnityEvent<bool> attackEvent;
+    public UnityAction<bool> attackEvent;
     // public UnityAction interactEvent;
     // public UnityAction pauseEvent;
 
