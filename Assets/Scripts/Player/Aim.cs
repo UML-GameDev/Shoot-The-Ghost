@@ -17,11 +17,18 @@ public class Aim : MonoBehaviour
 
     float phaseAngle;
 
-    void OnEnable(){
+
+    void OnEnable()
+    {
         input.lookEvent += AimAtCursor;
     }
 
-    void OnDiable(){
+    void OnDisable()
+    {
+        input.lookEvent -= AimAtCursor;
+    }
+    void OnDestroy()
+    {
         input.lookEvent -= AimAtCursor;
     }
 
