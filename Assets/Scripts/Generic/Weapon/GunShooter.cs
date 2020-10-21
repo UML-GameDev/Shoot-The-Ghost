@@ -4,12 +4,12 @@ using UnityEngine;
 
 
 enum GunState { SHOOTING, RELOADING, OUT_OF_AMMO }
-public class GunShooter : Shooter<GunData>
+public class GunShooter : Shooter<GunData>, IEquippableItem
 {
     float currReloadTime;
     int currAmmo;
     GunState gunState;
-
+ 
 
     void Start()
     {
@@ -32,10 +32,13 @@ public class GunShooter : Shooter<GunData>
         }
     }
 
+
     public override void Shoot()
     {
+
         if(currAmmo > 0)
         {
+
             currAmmo -= 1;
 
             GameObject bulletObject = PoolManager.Instance.GetBullet();

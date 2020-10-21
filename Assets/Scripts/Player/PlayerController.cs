@@ -17,13 +17,11 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
 
     public float currHealth { get; set; }
     public float maxHealth = 100f;
-    public GameObject healthBar;
+
     public float regenDelay = 1f;
     public float regenRate = 5f;
 
-    Vector3 healthBarSize;
-    Vector3 healthBarPosition;
-    
+
     float regenTimer;
     
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
@@ -38,6 +36,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     private bool onGround = false;
 
     private GameObject currentGround;
+
 
     private Collider2D myCollider;
 
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
-        }    
+        }
     }
 
     public void TakeDamage(float damage)
