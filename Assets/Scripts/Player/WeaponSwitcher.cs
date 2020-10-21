@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class WeaponSwitcher : MonoBehaviour
 {
 
-    public UnityEvent<EquippableItem> OnEquipSwitched = new UnityEvent<EquippableItem>();
+    public UnityEvent<IEquippableItem> OnEquipSwitched = new UnityEvent<IEquippableItem>();
     public GameObject currentWeapon;
     public InputManager input;
 
@@ -16,6 +16,8 @@ public class WeaponSwitcher : MonoBehaviour
         var inputUser = currentWeapon.GetComponent<InputUser>();
         
         inputUser.input = this.input;
+
+        currentWeapon.SetActive(true);
         inputUser.enabled = true;
         
     }

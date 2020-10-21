@@ -36,7 +36,7 @@ public class Ghost : MonoBehaviour
             {
                 targetTime = t + 1.5f;
                 randNum = targetRandNum;
-                targetRandNum = Random.Range(-50, 50);
+                targetRandNum = Random.Range(-30, 30);
             }
 
             randNum = Mathf.Lerp(randNum, targetRandNum, Time.deltaTime * 2f);
@@ -44,7 +44,6 @@ public class Ghost : MonoBehaviour
             moveDir = Vector3.Slerp(moveDir, Quaternion.Euler(0, 0, randNum) * distVec.normalized, Time.deltaTime * 10f);
             transform.position = transform.position + moveDir * speed * Time.deltaTime;
         }
-
     }
 
     void OnTriggerStay2D(Collider2D collider)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Shooter<T> : EquippableItem 
+public abstract class Shooter<T> : MonoBehaviour, IShooter
 where T : ShooterData
 {   
     public T shooterData;
@@ -11,7 +11,6 @@ where T : ShooterData
 
 
     public UnityEvent OnFinished { get; set; } = new UnityEvent();
-
 
     bool isHolding;
 

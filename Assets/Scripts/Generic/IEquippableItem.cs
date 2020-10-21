@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public abstract class EquippableItem : MonoBehaviour
+public interface IEquippableItem
 {
-
 }

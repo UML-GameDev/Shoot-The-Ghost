@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 enum GunState { SHOOTING, RELOADING, OUT_OF_AMMO }
-public class GunShooter : Shooter<GunData>
+public class GunShooter : Shooter<GunData>, IEquippableItem
 {
     float currReloadTime;
     int currAmmo;
