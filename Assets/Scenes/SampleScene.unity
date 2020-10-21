@@ -3462,6 +3462,7 @@ PrefabInstance:
       propertyPath: damage
       value: 48.53
       objectReference: {fileID: 0}
+
     - target: {fileID: 2566723097961117532, guid: 234109d2c53372e4eb18252c8f212f48,
         type: 3}
       propertyPath: m_LocalPosition.x
