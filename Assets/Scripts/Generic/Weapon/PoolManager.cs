@@ -4,48 +4,47 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    private static PoolManager instance;
-    public static PoolManager Instance { get { return instance; } }
+    public static PoolManager Instance { get; private set; }
 
-    public GameObject bulletPrefab;
-    public int bulletAmount = 20;
+    public GameObject objPrefab;
+    public int objAmount = 20;
 
-    private List<GameObject> bullets;
+    private List<GameObject> objs;
 
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        Instance = this;
 
-        // Preload bullets
-        bullets = new List<GameObject>(bulletAmount);
+        // Preload objs
+        objs = new List<GameObject>(objAmount);
 
-        for (int i = 0; i < bulletAmount; i++)
+        for (int i = 0; i < objAmount; i++)
         {
-            GameObject prefabInstance = Instantiate(bulletPrefab);
+            GameObject prefabInstance = Instantiate(objPrefab);
             prefabInstance.transform.SetParent(transform);
             prefabInstance.SetActive(false);
 
-            bullets.Add(prefabInstance);
+            objs.Add(prefabInstance);
         }
     }
 
     public GameObject GetBullet()
     {
-        foreach (GameObject bullet in bullets)
+        foreach (GameObject obj in objs)
         {
-            if (!bullet.activeInHierarchy)
+            if (!obj.activeInHierarchy)
             {
                 // This finds a bullet that isn't active, and activates it
-                bullet.SetActive(true);
-                return bullet;
+                obj.SetActive(true);
+                return obj;
             }
         }
         // This brings the bullet into the gameworld
-        GameObject prefabInstance = Instantiate(bulletPrefab);
+        GameObject prefabInstance = Instantiate(objPrefab);
         // I don't know what this does
         prefabInstance.transform.SetParent(transform);
-        bullets.Add(prefabInstance);
+        objs.Add(prefabInstance);
 
         return prefabInstance;
     }

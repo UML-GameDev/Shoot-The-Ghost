@@ -19,9 +19,6 @@ public class Throwable : MonoBehaviour
         blastCollider.isTrigger = true;
         blastCollider.radius = throwableData.effectRadius;
         blastCollider.enabled = false;
-
-        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
-        rb2d.AddForce(throwableData.throwForce);
     }
 
     void Update()

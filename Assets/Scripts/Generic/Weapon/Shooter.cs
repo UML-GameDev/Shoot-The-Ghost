@@ -2,25 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Shooter<T> : MonoBehaviour
+public abstract class Shooter<T> : WeaponBase
 where T : ShooterData
-{   
+{
     public T shooterData;
     float timeToFire;
 
-    public InputManager input;
-
-    bool isHolding;
-
-    void OnEnable(){
-        input.attackEvent += setHolding;
-    }
-    
-    void OnDisable()
-    {
-        input.attackEvent = null;
-    }
-
+    public Shooter() : base(WeaponType.SHOOT) { }
 
     protected void CheckShouldShoot()
     {
@@ -32,7 +20,7 @@ where T : ShooterData
         }
     }
 
-    void setHolding(bool isHolding)
+    public override void AttackState(bool isHolding)
     {
         this.isHolding = isHolding;
     }
