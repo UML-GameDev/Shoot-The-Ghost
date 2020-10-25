@@ -1,9 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-
-using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
+
+/*
+ * PlayerController
+ *      This class handles player movement as well as damages taken from enemy, also handle scene reset(when player died)
+ *      
+ *      This class inhertis Monobehaviour to attach to GameObject
+ *      and HealthUpdatable to handle the damage and Health UI
+ *      
+ *      This class should attach to Player Object
+ */
 
 [System.Serializable]
 public class PlayerController : MonoBehaviour, HealthUpdatable
@@ -17,13 +24,10 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
 
     public float currHealth { get; set; }
     public float maxHealth = 100f;
-    public GameObject healthBar;
+
     public float regenDelay = 1f;
     public float regenRate = 5f;
 
-    Vector3 healthBarSize;
-    Vector3 healthBarPosition;
-    
     float regenTimer;
     
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
@@ -36,8 +40,6 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     private float velVec = 0f;
 
     private bool onGround = false;
-
-    private GameObject currentGround;
 
     private Collider2D myCollider;
 
@@ -92,11 +94,12 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
         {
             onGround = true;
-        }    
+        }
     }
 
     public void TakeDamage(float damage)
     {
+        //same as if(currHealth >= damage) currHeath -= damage; else currHealth = 0;
         currHealth = (currHealth >= damage) ? currHealth - damage : 0;
     }
 
@@ -114,13 +117,12 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         
     }
 
-    //Event function for InputManager
-        //basic movement
+    //Event function that attach to moveEvent in InputManager for callback
     void MoveVector(Vector2 input)
     {
         velVec = input.x;
     }
-
+    //Event function that attach to jumpEvent in InputManager for callback
     void Jump(){
         if (onGround)
         {

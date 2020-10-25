@@ -216,6 +216,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "3d6100fd-abf3-4097-9fd8-6ec87755fb6a",
+            "actions": [
+                {
+                    "name": "SwitchInventory",
+                    "type": "PassThrough",
+                    "id": "402e4772-cfbd-4e2d-af2a-074da83ea6c0",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ae92d34c-aafd-4b0e-82dc-5d6b764378e0",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

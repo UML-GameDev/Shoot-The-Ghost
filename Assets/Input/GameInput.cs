@@ -229,6 +229,33 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""3d6100fd-abf3-4097-9fd8-6ec87755fb6a"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchInventory"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""402e4772-cfbd-4e2d-af2a-074da83ea6c0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ae92d34c-aafd-4b0e-82dc-5d6b764378e0"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -300,6 +327,9 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_SwitchInventory = m_UI.FindAction("SwitchInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -402,6 +432,39 @@ public class @GameInput : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_SwitchInventory;
+    public struct UIActions
+    {
+        private @GameInput m_Wrapper;
+        public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchInventory => m_Wrapper.m_UI_SwitchInventory;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @SwitchInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchInventory;
+                @SwitchInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchInventory;
+                @SwitchInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchInventory;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SwitchInventory.started += instance.OnSwitchInventory;
+                @SwitchInventory.performed += instance.OnSwitchInventory;
+                @SwitchInventory.canceled += instance.OnSwitchInventory;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -453,5 +516,9 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnSwitchInventory(InputAction.CallbackContext context);
     }
 }
