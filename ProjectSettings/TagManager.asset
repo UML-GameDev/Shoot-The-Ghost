@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bullet
   - Enemy
+  - Bullet
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - Platform
+  - Enemy
   - 
   - 
   - 

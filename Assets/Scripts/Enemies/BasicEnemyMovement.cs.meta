@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Player/PlatformMover.cs.meta
+guid: 15973f496e7330942979ab26cd388a83
+=======
+guid: 2036df689c0eeea47bec2b65285aff3d
+>>>>>>> UML_STG/master:Assets/Scripts/Enemies/BasicEnemyMovement.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
