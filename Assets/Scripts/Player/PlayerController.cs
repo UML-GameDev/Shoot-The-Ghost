@@ -116,6 +116,16 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         }
         
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("EnemyBullet"))
+        {
+            float damage = collision.gameObject.GetComponent<EnemyBullet>().bulletData.bulletDamage; // Enemy does less damage than the player does
+
+            TakeDamage(damage);
+            OnHealthUpdated.Invoke(currHealth);
+        }
+    }
 
     //Event function that attach to moveEvent in InputManager for callback
     void MoveVector(Vector2 input)
