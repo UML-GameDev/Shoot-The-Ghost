@@ -1,12 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
+/*
+ * InventoryUI
+ *      This class handles the UI of the Inventory
+ *      
+ *      This class inherits MonoBeahviour so it can attach to gameObject
+ *      
+ *      This class should attach to a gameObject where it hold Slot Prefab as a child
+ */
 public class InventoryUI: MonoBehaviour
 {
-    public InventoryManager inventoryM;
-    //TODO(MAYBE?)-Change this to accept arr of gameObject(itemsBorder)and iterate and get list of border object seraching child of the gameobject
-    public GameObject[] itemsBorder;
+    public UIManager inventoryM;
+
+    public GameObject[] items;
+    private GameObject[] borders;
+    private GameObject[] ammoTexts;
     int previousIndex = 0;
     
     // Start is called before the first frame update
@@ -14,24 +24,44 @@ public class InventoryUI: MonoBehaviour
     {
         inventoryM.switchWeaponUIEvent += UpdateSelected;
 
-        for(int i = 1; i < itemsBorder.Length; ++i){
-            if (i == 0) itemsBorder[i].SetActive(true);
-            else        itemsBorder[i].SetActive(false);
+        //If the borders is not declared yet, declared it with size of items
+        if (borders == null) borders = new GameObject[items.Length];
+        if (ammoTexts == null) ammoTexts = new GameObject[items.Length];
+
+        for(int i = 0; i < items.Length; ++i){
+            //If it's not declared, find the gameObject with name Border and assign to gameObject
+            if (borders[i] == null) borders[i] = items[i].transform.Find("Border").gameObject;
+            if (ammoTexts[i] == null) ammoTexts[i] = items[i].transform.Find("Count").gameObject;
+
+            //Set Active the first items
+            if (i == 0)
+            {
+                borders[i].SetActive(true);
+                ammoTexts[i].SetActive(true);
+            }
+            else
+            {
+                borders[i].SetActive(false);
+                ammoTexts[i].SetActive(false);
+            }
         }
         previousIndex = 0;
     }
 
     void OnDisable(){
         inventoryM.switchWeaponUIEvent -= UpdateSelected; 
-        for(int i = 0; i < itemsBorder.Length; ++i){
-            itemsBorder[i].SetActive(false);
+        for(int i = 0; i < borders.Length; ++i){
+            borders[i].SetActive(false);
+            ammoTexts[i].SetActive(false);
         }
     }
 
-    void UpdateSelected(int index){
-        itemsBorder[previousIndex].SetActive(false);
-        itemsBorder[index].SetActive(true);
-        
+    public void UpdateSelected(int index){
+        borders[previousIndex].SetActive(false);
+        ammoTexts[previousIndex].SetActive(false);
+        borders[index].SetActive(true);
+        ammoTexts[index].SetActive(true);
+
         previousIndex = index;
     }
 }

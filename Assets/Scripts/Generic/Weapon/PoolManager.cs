@@ -1,51 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class PoolManager : MonoBehaviour
 {
-    private static PoolManager instance;
-    public static PoolManager Instance { get { return instance; } }
+    public int currentCount { get; private set; }
+    public int objectAmount { get; private set; }
 
-    public GameObject bulletPrefab;
-    public int bulletAmount = 20;
+    public GameObject objectPrefab;
+    public GunData data;
 
-    private List<GameObject> bullets;
+    private List<GameObject> objects;
+
+    [HideInInspector] public UnityEvent<int> OnCountUpdate;
 
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        objectAmount = data.maxAmmo;
+        currentCount = objectAmount;
+        // Preload objects
+        objects = new List<GameObject>(objectAmount);
 
-        // Preload bullets
-        bullets = new List<GameObject>(bulletAmount);
-
-        for (int i = 0; i < bulletAmount; i++)
+        for (int i = 0; i < objectAmount; i++)
         {
-            GameObject prefabInstance = Instantiate(bulletPrefab);
+            GameObject prefabInstance = Instantiate(objectPrefab);
             prefabInstance.transform.SetParent(transform);
             prefabInstance.SetActive(false);
 
-            bullets.Add(prefabInstance);
+            objects.Add(prefabInstance);
         }
     }
 
-    public GameObject GetBullet()
+    public GameObject GetObject()
     {
-        foreach (GameObject bullet in bullets)
+        foreach (GameObject obj in objects)
         {
-            if (!bullet.activeInHierarchy)
+            if (!obj.activeInHierarchy)
             {
-                // This finds a bullet that isn't active, and activates it
-                bullet.SetActive(true);
-                return bullet;
+                // This finds a object that isn't active, and activates it
+                obj.SetActive(true);
+                OnCountUpdate.Invoke(--currentCount);
+                return obj;
             }
         }
-        // This brings the bullet into the gameworld
-        GameObject prefabInstance = Instantiate(bulletPrefab);
+        // This brings the object into the gameworld
+        GameObject prefabInstance = Instantiate(objectPrefab);
         // I don't know what this does
         prefabInstance.transform.SetParent(transform);
-        bullets.Add(prefabInstance);
+        objects.Add(prefabInstance);
 
         return prefabInstance;
     }

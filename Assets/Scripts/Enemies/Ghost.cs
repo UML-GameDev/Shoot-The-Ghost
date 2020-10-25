@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+ * Ghost
+ *      This is a class where it handles the Ghost Object which spawns after the Enemies are dead, also follow and attack the player
+ *      This class inherits MonoBehaviour
+ *      
+ *      This class should attach to any ghost class
+ */ 
 enum GhostState { CHASING_PLAYER, SUBDUED }
 public class Ghost : MonoBehaviour
 {
-
     GhostState ghostState;
     public Transform player;
 
@@ -23,7 +28,6 @@ public class Ghost : MonoBehaviour
     }
 
     // Update is called once per frame
-
     void Update()
     {
         if(ghostState == GhostState.CHASING_PLAYER)

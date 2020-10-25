@@ -1,26 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
+/*
+ * GunController
+ *      GunController class handles the 
+ * 
+ * 
+ */
 
 public class GunController : InputUser
 {
     IShooter shooter;
 
-
     void Awake()
     {
         shooter = GetComponent<IShooter>();
-    }
-
-    void Start()
-    {
-
-    }
-
-    void OnDisable()
-    {
-
     }
     
     void OnEnable()
@@ -31,5 +23,10 @@ public class GunController : InputUser
         {
             input.attackEvent -= shooter.setHolding;
         });
+    }
+
+    void OnDisable()
+    {
+        input.attackEvent -= shooter.setHolding;
     }
 }

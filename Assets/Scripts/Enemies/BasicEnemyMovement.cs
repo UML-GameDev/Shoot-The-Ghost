@@ -1,7 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/*
+ * BasicEnemyMovement
+ *      This class handles the movement of the enemy
+ *      This class inherit Monobehaviour
+ *      
+ *      This class should attach to any basic Enemy Object
+ */ 
 public class BasicEnemyMovement : MonoBehaviour
 {
     public float speed = 1.5f;

@@ -1,5 +1,14 @@
 ﻿using UnityEngine;
 
+/*
+ * HealthBarUpdater 
+ *      This class handles UI of Entities' health Bar
+ *      
+ *      This class inherits Monobehaviour so it can attach to gameObject
+ *      
+ *      This class should be attach to a gameObject that has HealthBar
+ */ 
+
 public class HealthBarUpdater : MonoBehaviour
 {
     float initHealthScaleX;
@@ -8,8 +17,9 @@ public class HealthBarUpdater : MonoBehaviour
     public Transform healthBarTrans;
 
     void Start()
-    {
-        owner.GetComponent<HealthUpdatable>().OnHealthUpdated.AddListener(updateHealth);
+    { 
+        //Update will called everytime owner's health is changed
+        owner.GetComponent<HealthUpdatable>().OnHealthUpdated.AddListener(UpdateHealth);
         initHealthScaleX = healthBarTrans.localScale.x;
         
         healthBarTrans.parent = null;
@@ -17,7 +27,7 @@ public class HealthBarUpdater : MonoBehaviour
         healthBarTrans.parent = transform;
     }
     
-    void updateHealth(float currHealth)
+    void UpdateHealth(float currHealth)
     {
         float newGlobalScaleX = (currHealth / 100f) * globalHealthScaleX;
         float scaleDelta = newGlobalScaleX - globalHealthScaleX;

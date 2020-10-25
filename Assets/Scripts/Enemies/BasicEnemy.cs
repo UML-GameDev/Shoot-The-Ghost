@@ -1,8 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
+/*
+ * BasicEnemy
+ *      This class handles basic enemy behaviour such as managing damage
+ *      
+ *      This class inhertis Monobehaviour and HealthUpdate
+ *      This class should attach to any basic enemy objects
+ */ 
 [System.Serializable]
 public class BasicEnemy : MonoBehaviour, HealthUpdatable
 {

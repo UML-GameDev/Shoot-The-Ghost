@@ -1,14 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-public class InventoryManager: MonoBehaviour, GameInput.IUIActions
+/*
+ * UIManager:
+ *      This class handles input for any interaction between user and UI   
+ *      
+ *      This class inherit GameInput.IUIAction, which includes any callbacks necessary to implement
+ *      and inherit MonoBehaviour so it can attach to GameObject
+ *
+ *      This class should attach to Empty gameObject
+ */
+
+public class UIManager: MonoBehaviour, GameInput.IUIActions
 {
+    //Events to invokes the when the specific player callbacks are call
     public UnityAction<int> switchWeaponUIEvent;
     public UnityAction<int> switchPlayerWeaponEvent;
+
     GameInput gameInput;
+
+    //Global variable: size of inventory and currentIndex
     [HideInInspector]public int currentIndex = 0;
     [HideInInspector]public int size = 3;
 
@@ -26,6 +38,7 @@ public class InventoryManager: MonoBehaviour, GameInput.IUIActions
     }
 
     public void OnSwitchInventory(InputAction.CallbackContext context){
+        //We reading vector2 because mouse scroll can be either vertical or "Horiztonal", and we want vertical input
         Vector2 offset = context.ReadValue<Vector2>();
         if(offset == new Vector2(0,0)) return;
         currentIndex -= (int)offset.y;

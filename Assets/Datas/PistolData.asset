@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adee92437732885448f3d305d3f71066, type: 3}
-  m_Name: ARGunData
+  m_Name: PistolData
   m_EditorClassIdentifier: 
-  fireRate: 2
-  maxAmmo: 50
-  reloadTime: 1
+  fireRate: 1
+  maxAmmo: 6
+  reloadTime: 25

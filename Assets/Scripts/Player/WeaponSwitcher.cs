@@ -1,30 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+
+/*
+ * Weapon Switcher
+ * 
+ * 
+ */ 
 
 public class WeaponSwitcher : MonoBehaviour
 {
-
-    public UnityEvent<IEquippableItem> OnEquipSwitched = new UnityEvent<IEquippableItem>();
-    public GameObject currentWeapon;
-    public InputManager input;
-
+    public UIManager um;
+    public GameObject[] weapons;
+    private int previousIndex = 0;
 
     void Awake()
     {
-        var inputUser = currentWeapon.GetComponent<InputUser>();
-        
-        inputUser.input = this.input;
+        um.switchPlayerWeaponEvent += Switch;
+        previousIndex = um.currentIndex;
 
-        currentWeapon.SetActive(true);
-        inputUser.enabled = true;
-        
+        for (int i = 0; i < weapons.Length; ++i)
+        {
+            if(i == 0) weapons[i].SetActive(true);
+            else weapons[i].SetActive(false);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    void Switch(int index)
     {
-        
+        weapons[previousIndex].SetActive(false);
+        weapons[index].SetActive(true);
+
+        previousIndex = index;
     }
 }

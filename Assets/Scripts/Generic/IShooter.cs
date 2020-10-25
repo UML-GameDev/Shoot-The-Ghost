@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
+/*
+ * IShooter
+ * 
+ * 
+ */ 
 public interface IShooter
 {
     UnityEvent OnFinished { get; set; }
