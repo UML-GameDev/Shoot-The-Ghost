@@ -109,12 +109,13 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
         var collObj = collision.gameObject;
         if(collObj.layer == LayerMask.NameToLayer("Enemy"))
         {
+            Debug.Log(collObj.name);
+            Debug.Log(collObj.layer);
             float damage = collObj.GetComponent<BasicEnemy>().damage;
             
             TakeDamage(damage);
             OnHealthUpdated.Invoke(currHealth);
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

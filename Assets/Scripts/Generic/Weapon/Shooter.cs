@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public abstract class Shooter<T> : MonoBehaviour, IShooter
 where T : ShooterData
-{   
+{
     public T shooterData;
     float timeToFire;
 
