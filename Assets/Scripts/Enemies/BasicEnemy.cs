@@ -45,7 +45,6 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
 
         bool tookDamage = false;
         float damage = 0f;
-        Debug.Log(collObj.tag);
         if (collision.CompareTag("Bullet"))
         {
             damage = collObj.GetComponent<Bullet>().bulletData.bulletDamage;

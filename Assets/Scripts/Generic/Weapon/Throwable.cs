@@ -33,7 +33,7 @@ public class Throwable : MonoBehaviour
             }else{
                 //instantiate blast effect
                 if(blastEffect) Instantiate(blastEffect,transform.position,new Quaternion());
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         } 
     }
