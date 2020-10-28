@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - EnemyBullet
   - Throwable
+  - Level
   layers:
   - Default
   - TransparentFX

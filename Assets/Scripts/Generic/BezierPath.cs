@@ -25,7 +25,7 @@ public class BezierPath
 	{
 		if (r == null) path = new LineRenderer();
 		else path = r;
-
+		path.material.color = Color.red;
 		path.sortingOrder = -1;
 
 		pathPoints = new List<Vector3>();

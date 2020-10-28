@@ -34,17 +34,22 @@ public class GunShooter : Shooter<GunData>, IEquippableItem
     public override void Shoot()
     {
 
-        if(currAmmo > 0)
+        if (currAmmo > 0)
         {
 
             currAmmo -= 1;
 
             GameObject bulletObject = pm.GetObject();
-            bulletObject.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, Random.Range(-10, 10));
-            bulletObject.transform.position = transform.position + transform.right;  
+            bulletObject.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, Random.Range(-1, 1));
+            bulletObject.transform.position = transform.position + transform.right;
 
         }
         else
-            gunState = GunState.OUT_OF_AMMO;
+        {
+            //gunState = GunState.OUT_OF_AMMO;
+            currAmmo = shooterData.maxAmmo;
+            pm.currentCount = currAmmo;
+        }
+        
     }
 }

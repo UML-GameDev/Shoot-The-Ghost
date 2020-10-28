@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class PoolManager : MonoBehaviour
 {
-    public int currentCount { get; private set; }
+    public int currentCount { get; set; }
     public int objectAmount { get; private set; }
 
     public GameObject objectPrefab;
