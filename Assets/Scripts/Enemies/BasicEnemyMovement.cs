@@ -26,13 +26,14 @@ public class BasicEnemyMovement : MonoBehaviour
         startPos = transform.position;
         enemyState = 0; // Set enemystate to PASSIVE by default
         currTime = 0f;
+        delta = Random.Range(-5, 5);
     }
 
     void Update()
     {
         if (enemyState == EnemyState.PASSIVE)
         {
-            transform.position = new Vector3(startPos.x + delta * Mathf.Sin(currTime * speed), 0, 0);
+            transform.position = new Vector3(startPos.x + delta * Mathf.Sin(currTime * speed), transform.position.y, 0);
             currTime += Time.deltaTime;
         }
     }

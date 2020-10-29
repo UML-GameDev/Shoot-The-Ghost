@@ -7,19 +7,17 @@ public class BasicEnemyDetection : MonoBehaviour
     float gunAngle;
 
     public PoolManager pm;
+    public GunShooter enemyShooter;
 
     //pivot point of arm
     public Transform pivot;
     public Transform gunBarrel;
 
-    public SpriteRenderer primaryArm;
-    public SpriteRenderer secondaryArm;
-
     float phaseAngle;
     public Transform player;
 
     public int playerDetected;
-    public float fireRate = 0.1f;
+    public float fireRate = 0.9f;
     public float currFireRate;
 
     private void Start()
@@ -49,11 +47,12 @@ public class BasicEnemyDetection : MonoBehaviour
         if(playerDetected == 1)
         {
             AimAtPlayer();
-            Shoot();
+            enemyShooter.setHolding(true);
         }
         if (playerDetected == 0)
         {
             gameObject.GetComponent<BasicEnemyMovement>().enemyState = BasicEnemyMovement.EnemyState.PASSIVE;
+            enemyShooter.setHolding(false);
         }
     }
 
@@ -78,9 +77,6 @@ public class BasicEnemyDetection : MonoBehaviour
             //Flip player to left side
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
             phaseAngle = 180;
-
-            //raise the sort order so left arm is over right arm
-            secondaryArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
         //If the player is facing left and mouse is facing right
         else if (transform.eulerAngles.y != 0 && dp > 0)
@@ -89,24 +85,9 @@ public class BasicEnemyDetection : MonoBehaviour
             //Flip player to right side
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
             phaseAngle = 0;
-
-            //lower the sort order so left arm is under right arm
-            secondaryArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
 
         //rotate the pivot point of arm according to the angle
         pivot.eulerAngles = new Vector3(pivot.eulerAngles.x, pivot.eulerAngles.y, Mathf.Sign(dp) * (gunAngle + phaseAngle));
-    }
-
-    void Shoot()
-    {
-        if (currFireRate <= 0)
-        {
-            GameObject bulletObject = pm.GetObject();
-            bulletObject.transform.rotation = gunBarrel.transform.rotation * Quaternion.Euler(0, 0, Random.Range(-10, 10));
-            bulletObject.transform.position = gunBarrel.transform.position + transform.right;
-            currFireRate = fireRate;
-        }
-        currFireRate -= Time.deltaTime;
     }
 }

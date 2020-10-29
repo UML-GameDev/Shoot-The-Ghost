@@ -13,6 +13,7 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
 {
     public float maxHealth = 100f;
     public float damage = 15f;
+    public GameObject ghost;
     
     public UnityEvent<float> OnHealthUpdated {get; } = new UnityEvent<float>();
     
@@ -30,7 +31,11 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     // Update is called once per frame
     void Update()
     {
-        if (currHealth <= 0) BoxCollider2D.Destroy(gameObject);
+        if (currHealth <= 0)
+        {
+            BoxCollider2D.Destroy(gameObject);
+            //if (Random.Range(0, 5) > 2.5f) { Instantiate(ghost); }
+        }
     }
 
     public void TakeDamage(float damage)

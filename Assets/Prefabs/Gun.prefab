@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 1618348643184853945}
   - component: {fileID: 1618348643184853950}
   - component: {fileID: 5833592704965888701}
-  - component: {fileID: 1213069441709976858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e3a366725f120714bbc85a10502bfe04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,20 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f909f4d06465f8447a5e858f7e9ae9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooterData: {fileID: 11400000, guid: 937dfd47c1178f34bb5ce0cf033c0e19, type: 2}
---- !u!114 &1213069441709976858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618348643184853944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f649608b76661e74785173ecca66005b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 0}
+  shooterData: {fileID: 11400000, guid: 50a27135ebe3e4c408e37a4099a4fe23, type: 2}
+  pm: {fileID: 0}
 --- !u!1 &1618348644045744474
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1618348644045744475}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

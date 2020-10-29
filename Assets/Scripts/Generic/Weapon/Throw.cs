@@ -35,7 +35,11 @@ public class Throw : WeaponBase, IEquippableItem
         
         if (showTrajectoryLine)
         {
-            path = gameObject.AddComponent<LineRenderer>();
+            path = GetComponent<LineRenderer>();
+            if(path == null)
+            {
+                path = gameObject.AddComponent<LineRenderer>();
+            }
             bPath = new BezierPath(path);
         }
         else
