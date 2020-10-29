@@ -10,11 +10,11 @@ public class AmmoCountUI : MonoBehaviour
     {
         text = GetComponent<Text>();
         pm.OnCountUpdate.AddListener(UpdateCountUI);
-        text.text = pm.objectAmount + "/" + "total";
+        text.text = pm.currentCount + "/" + pm.maxCount;
     }
 
-    void UpdateCountUI(int count)
+    void UpdateCountUI()
     {
-        text.text = count + "/" + "total";
+        text.text = pm.currentCount + "/" + pm.maxCount;
     }
 }

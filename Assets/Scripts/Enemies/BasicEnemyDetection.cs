@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BasicEnemyDetection : MonoBehaviour
 {
@@ -47,15 +45,16 @@ public class BasicEnemyDetection : MonoBehaviour
         if(playerDetected == 1)
         {
             AimAtPlayer();
-            enemyShooter.setHolding(true);
+            enemyShooter.SetHolding(true);
         }
         if (playerDetected == 0)
         {
             gameObject.GetComponent<BasicEnemyMovement>().enemyState = BasicEnemyMovement.EnemyState.PASSIVE;
-            enemyShooter.setHolding(false);
+            enemyShooter.SetHolding(false);
         }
     }
 
+    //TODO-Same as the Aim function at Aim.cs -> Find a way to make the function at single place
     void AimAtPlayer()
     {
         //Convert the screen mouse position relative to world position
@@ -66,10 +65,8 @@ public class BasicEnemyDetection : MonoBehaviour
         // Finds the angle at which the gun should be pointing by taking the inverse tangent of mousePosition.y over mousePosition.x, converts to degrees
         gunAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-
         //Find the dot product between right(1,0,0) and norm of direction vector to see which side the player is facing
         float dp = Vector3.Dot(Vector3.right, direction.normalized);
-
 
         //If the player is facing right and mouse is facing left
         if (transform.eulerAngles.y == 0 && dp < 0)
@@ -81,7 +78,6 @@ public class BasicEnemyDetection : MonoBehaviour
         //If the player is facing left and mouse is facing right
         else if (transform.eulerAngles.y != 0 && dp > 0)
         {
-
             //Flip player to right side
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
             phaseAngle = 0;
