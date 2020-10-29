@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-
 /*
  * InputManager:
  *      This class handles input for any interaction between user and player    
@@ -12,7 +11,6 @@ using UnityEngine.Events;
  *
  *      This class should attach to Empty gameObject
  */
-
 public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
 {
     //Events to invokes the when the specific player callbacks are call
@@ -20,6 +18,7 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
     public UnityAction<Vector2> lookEvent; //aim
     public UnityAction jumpEvent;
     public UnityAction<bool> attackEvent;
+    public UnityAction reloadEvent;
     // public UnityAction interactEvent;
     // public UnityAction pauseEvent;
 
@@ -44,6 +43,14 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
         }
     }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (jumpEvent != null && context.phase == InputActionPhase.Started)
+        {
+            jumpEvent.Invoke();
+        }
+    }
+
     public void OnLook(InputAction.CallbackContext context){
         if(lookEvent != null){
             lookEvent.Invoke(context.ReadValue<Vector2>());
@@ -64,9 +71,12 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
             }
         }
     }
-    public void OnJump(InputAction.CallbackContext context){
-        if(jumpEvent != null && context.phase == InputActionPhase.Started){
-            jumpEvent.Invoke();
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if(reloadEvent != null)
+        {
+            reloadEvent.Invoke();
         }
     }
 }
