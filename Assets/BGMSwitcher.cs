@@ -12,7 +12,6 @@ public class BGMSwitcher : MonoBehaviour
         {
             if (source.clip != switchBGM)
             {
-                Debug.Log("switch");
                 source.clip = switchBGM;
                 source.Play();
             }

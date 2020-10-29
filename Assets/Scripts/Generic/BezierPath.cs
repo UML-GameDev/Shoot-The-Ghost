@@ -13,10 +13,9 @@ public class BezierPath
 	public BezierPath()
 	{
 		path = new LineRenderer();
-		path.sortingOrder = -1;
+		path.startWidth = 0.5f;
+		path.endWidth = 0.5f;
 
-		//define the list of vector3
-		//set the count to 100
 		pathPoints = new List<Vector3>();
 		pointCount = 100;
 		path.positionCount = pointCount;
@@ -25,8 +24,8 @@ public class BezierPath
 	{
 		if (r == null) path = new LineRenderer();
 		else path = r;
-		path.material.color = Color.red;
-		path.sortingOrder = -1;
+		path.startWidth = 0.3f;
+		path.endWidth = 0.3f;
 
 		pathPoints = new List<Vector3>();
 		path.positionCount = pointCount;
@@ -36,8 +35,6 @@ public class BezierPath
 	{
 		pathPoints.Clear();
 	}
-
-
 
 	Vector3 BezierPathCalculation(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
 	{
@@ -55,7 +52,6 @@ public class BezierPath
 		B += 3.0f * uu * t * p1;    //3*(1-t)^2 * t * p1
 		B += 3.0f * u * tt * p2;    //3*(1-t) * t^2 * p2
 		B += ttt * p3;              //(1-t)^3 * p3
-
 
 		return (Vector2)B;
 	}

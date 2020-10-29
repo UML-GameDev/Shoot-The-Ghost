@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -90,8 +91,9 @@ public class PlayerController : MonoBehaviour, HealthUpdatable
     //when player jumped, check the bottom of player to check if the the radius we set hit with ground layer mask
     void CheckGround()
     {
-        var collider = Physics2D.OverlapBox(groundCheck.position, new Vector2(transform.localScale.x, 0.001f), 0);
-        if(rb2d.velocity.y <= 0 &&  collider != null && collider != myCollider)
+        RaycastHit2D result = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.5f,LayerMask.GetMask("Level"));
+        
+        if (rb2d.velocity.y <= 0 && result.collider != null)
         {
             onGround = true;
         }

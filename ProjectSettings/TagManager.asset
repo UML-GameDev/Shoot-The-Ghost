@@ -22,7 +22,7 @@ TagManager:
   - Ground
   - Platform
   - Enemy
-  - 
+  - Level
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Level
+    uniqueID: 3994225485
     locked: 0

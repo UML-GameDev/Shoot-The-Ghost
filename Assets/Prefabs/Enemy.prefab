@@ -321,7 +321,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8b69c73df11100e41b5268c4d5b0d353, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2679245, g: 0.96300685, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage: 50
+  ghost: {fileID: 1380291288826539793, guid: c05b50388854c694f8aaf799f213c010, type: 3}
   attackRate: 0.5
   attackTimer: 0
 --- !u!114 &2566723097961117534
