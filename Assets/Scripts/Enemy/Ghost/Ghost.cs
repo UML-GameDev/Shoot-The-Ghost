@@ -50,6 +50,14 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(ghostState != GhostState.CHASING_PLAYER && collider.CompareTag("Violin"))
+        {
+            ghostState = GhostState.SUBDUED;
+        }
+    }
+
     void OnTriggerStay2D(Collider2D collider)
     {
         if(ghostState == GhostState.CHASING_PLAYER && collider.gameObject.tag == "Player")

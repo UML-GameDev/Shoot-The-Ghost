@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEditor;
 
 /*
  * InputManager:
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
     public UnityAction jumpEvent;
     public UnityAction<bool> attackEvent;
     public UnityAction reloadEvent;
+    public UnityAction switchModeEvent;
     // public UnityAction interactEvent;
     // public UnityAction pauseEvent;
 
@@ -77,6 +79,14 @@ public class InputManager : MonoBehaviour,  GameInput.IPlayerActions
         if(reloadEvent != null)
         {
             reloadEvent.Invoke();
+        }
+    }
+    
+    public void OnSwitchMode(InputAction.CallbackContext context)
+    {
+        if(switchModeEvent != null)
+        {
+            switchModeEvent.Invoke();
         }
     }
 }
