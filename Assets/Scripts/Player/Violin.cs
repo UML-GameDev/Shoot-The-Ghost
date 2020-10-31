@@ -2,13 +2,15 @@
 
 public class Violin : MonoBehaviour
 {
+    public InputManager im;
+
     CircleCollider2D aoe;
 
-    public bool isHolding;
-    const float maxRadius = 10f;
-    const float minRadius = 5f;
-    const float increaseRate = 0.5f;
-    const float decreaseRate = 1.1f;
+    bool isHolding;
+    public float maxRadius = 10f;
+    public float minRadius = 2f;
+    public float increaseRate = 0.5f;
+    public float decreaseRate = 1.1f;
     public float currentRadius = 0f;
 
     void Awake()
@@ -19,38 +21,41 @@ public class Violin : MonoBehaviour
 
     void OnEnable()
     {
+        im.attackEvent += SetHolding;
         currentRadius = minRadius;
         aoe.isTrigger = true;
         aoe.radius = currentRadius;
+        aoe.enabled = false;
+        gameObject.SetActive(true);
     }
 
     void OnDisable()
     {
-        aoe.isTrigger = false;
-        aoe.radius = 0f;
-        currentRadius = 0f;
+        im.attackEvent -= SetHolding;
+        gameObject.SetActive(false);
     }
 
     void Update()
     {
         if (isHolding)
         {
-            if(currentRadius <= maxRadius)
+            if (currentRadius <= maxRadius)
             {
                 currentRadius += increaseRate * Time.deltaTime;
             }
         }
         else
         {
-            if(currentRadius >= minRadius)
+            if (currentRadius > minRadius)
             {
                 currentRadius -= decreaseRate * Time.deltaTime;
             }
         }
+        aoe.enabled = currentRadius > minRadius;
         aoe.radius = currentRadius;
     }
     public void SetHolding(bool isHolding)
     {
-        this.isHolding = isHolding; 
+        this.isHolding = isHolding;
     }
 }

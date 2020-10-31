@@ -12,11 +12,9 @@
 public class Aim : MonoBehaviour
 {
     public InputManager input;
+    public Transform playerTransform;
 
     float gunAngle;
-
-    //pivot point of arm
-    public Transform pivot;
 
     public SpriteRenderer primaryArm;
     public SpriteRenderer secondaryArm;
@@ -42,31 +40,31 @@ public class Aim : MonoBehaviour
         //Convert the screen mouse position relative to world position
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(mp);
         // Finds the distance between the mouse cursor and the player's arm
-        Vector3 direction = mousePosition - pivot.position;
-        
+        Vector3 direction = mousePosition - transform.position;
+
         // Finds the angle at which the gun should be pointing by taking the inverse tangent of mousePosition.y over mousePosition.x, converts to degrees
         gunAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
 
         //Find the dot product between right(1,0,0) and norm of direction vector to see which side the player is facing
         float dp = Vector3.Dot(Vector3.right, direction.normalized);
 
 
         //If the player is facing right and mouse is facing left
-        if(transform.eulerAngles.y == 0 && dp < 0)
+        if (playerTransform.eulerAngles.y == 0 && dp < 0)
         {
             //Flip player to left side
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
+            playerTransform.eulerAngles = new Vector3(playerTransform.eulerAngles.x, 180f, playerTransform.eulerAngles.z);
             phaseAngle = 180;
 
             //raise the sort order so left arm is over right arm
             secondaryArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
         //If the player is facing left and mouse is facing right
-        else if (transform.eulerAngles.y != 0 && dp > 0){
+        else if (playerTransform.eulerAngles.y != 0 && dp > 0)
+        {
 
             //Flip player to right side
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
+            playerTransform.eulerAngles = new Vector3(playerTransform.eulerAngles.x, 0f, playerTransform.eulerAngles.z);
             phaseAngle = 0;
 
             //lower the sort order so left arm is under right arm
@@ -74,6 +72,6 @@ public class Aim : MonoBehaviour
         }
 
         //rotate the pivot point of arm accoridng to the angle
-        pivot.eulerAngles = new Vector3(pivot.eulerAngles.x, pivot.eulerAngles.y, Mathf.Sign(dp) * (gunAngle + phaseAngle));
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Mathf.Sign(dp) * (gunAngle + phaseAngle));
     }
 }
