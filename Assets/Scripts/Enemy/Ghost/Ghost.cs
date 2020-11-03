@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 /*
  * Ghost
@@ -12,7 +11,6 @@ enum GhostState { CHASING_PLAYER, SUBDUED }
 public class Ghost : MonoBehaviour
 {
     GhostState ghostState;
-    public Transform player;
     Transform target;
 
     public float speed;
@@ -27,6 +25,8 @@ public class Ghost : MonoBehaviour
 
     void Start()
     {
+        if (!target) target = GameObject.FindGameObjectWithTag("Player").transform;
+
         ghostState = GhostState.CHASING_PLAYER;
         noteEffectEmi = GetComponent<ParticleSystem>().emission;
         noteEffectEmi.enabled = false;
@@ -36,21 +36,14 @@ public class Ghost : MonoBehaviour
     void Update()
     {
         Vector3 distVec = new Vector3();
-        if (ghostState == GhostState.CHASING_PLAYER)
+        if (target)
         {
-           distVec = player.transform.position - transform.position;
+            distVec = target.transform.position - transform.position;
         }
-        else if(ghostState == GhostState.SUBDUED)
+        else
         {
-            if (target)
-            {
-                distVec = target.transform.position - transform.position;
-            }
-            else
-            {
-                Debug.Log("No Target Found");
-                Destroy(gameObject);
-            }
+            Debug.Log("No Target Found");
+            Destroy(gameObject);
         }
 
         t += Time.deltaTime;
@@ -70,19 +63,32 @@ public class Ghost : MonoBehaviour
 
     void FindTarget()
     {
-        //TODO-See on forum said use spherecast instead so that it could take in less enemy
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0)).x * 1.2f);
+
         float closestDistance = Mathf.Infinity;
-        foreach(GameObject enemy in enemies)
+        foreach (Collider2D collider in colliders)
         {
-            float distance = (enemy.transform.position - transform.position).magnitude;
-            if (closestDistance > distance && enemy.GetComponent<Renderer>().isVisible)
-            {
-                target = enemy.transform;
-                closestDistance = distance;
+            if (collider.CompareTag("Enemy")){
+                float distance = (collider.transform.position - transform.position).magnitude;
+                if(closestDistance > distance)
+                {
+                    target = collider.transform;
+                    closestDistance = distance;
+                }
             }
         }
+
+        //TODO-See on forum said use spherecast instead so that it could take in less enemy
+        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //foreach(GameObject enemy in enemies)
+        //{
+        //    float distance = (enemy.transform.position - transform.position).magnitude;
+        //    if (closestDistance > distance && enemy.GetComponent<Renderer>().isVisible)
+        //    {
+        //        target = enemy.transform;
+        //        closestDistance = distance;
+        //    }
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -90,6 +96,7 @@ public class Ghost : MonoBehaviour
         if(ghostState == GhostState.CHASING_PLAYER && collider.CompareTag("Violin"))
         {
             ghostState = GhostState.SUBDUED;
+            target = null;
             FindTarget();
             noteEffectEmi.enabled = true;  
             Debug.Log("Ghost Subdued");
@@ -103,7 +110,8 @@ public class Ghost : MonoBehaviour
             collider.gameObject.GetComponent<PlayerController>().TakeDamage(damagePerSec * Time.deltaTime);
         }else if(ghostState == GhostState.SUBDUED && collider.CompareTag("Enemy"))
         {
-            collider.gameObject.GetComponent<BasicEnemy>().TakeDamage(20f);
+            //if should one hit kill the enemy
+            collider.gameObject.GetComponent<BasicEnemy>().TakeDamage(200f);
             Destroy(gameObject);
         }
     }

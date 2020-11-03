@@ -33,8 +33,9 @@ public class BasicEnemy : MonoBehaviour, HealthUpdatable
     {
         if (currHealth <= 0)
         {
+            Instantiate(ghost,transform.position,transform.rotation);
             BoxCollider2D.Destroy(gameObject);
-            //if (Random.Range(0, 5) > 2.5f) { Instantiate(ghost); }
+            //if (Random.Range(0, 5) > 2.5f) { }
         }
     }
 

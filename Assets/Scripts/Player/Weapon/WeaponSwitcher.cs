@@ -6,27 +6,27 @@
  */
 public class WeaponSwitcher : MonoBehaviour
 {
-    public UIManager um;
+    public UIManager uim;
     public GameObject[] weapons;
     private int previousIndex = 0;
-
-    void Awake()
-    {
-        um.switchPlayerWeaponEvent += Switch;
-        previousIndex = um.currentIndex;
-    }
+    public GameObject ui;
 
     void OnEnable()
     {
+        previousIndex = uim.currentIndex;
+        uim.switchPlayerWeaponEvent += Switch;
         for (int i = 0; i < weapons.Length; ++i)
         {
-            if (i == 0) weapons[i].SetActive(true);
+            if (i == previousIndex) weapons[i].SetActive(true);
             else weapons[i].SetActive(false);
         }
+        ui.SetActive(true);
     }
     void OnDisable()
     {
+        uim.switchPlayerWeaponEvent -= Switch;
         foreach (GameObject weapon in weapons) { weapon.SetActive(false); }
+        ui.SetActive(false);
     }
 
     void Switch(int index)
