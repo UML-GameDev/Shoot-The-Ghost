@@ -63,19 +63,32 @@ public class Ghost : MonoBehaviour
 
     void FindTarget()
     {
-        //TODO-See on forum said use spherecast instead so that it could take in less enemy
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0)).x * 1.2f);
+
         float closestDistance = Mathf.Infinity;
-        foreach(GameObject enemy in enemies)
+        foreach (Collider2D collider in colliders)
         {
-            float distance = (enemy.transform.position - transform.position).magnitude;
-            if (closestDistance > distance && enemy.GetComponent<Renderer>().isVisible)
-            {
-                target = enemy.transform;
-                closestDistance = distance;
+            if (collider.CompareTag("Enemy")){
+                float distance = (collider.transform.position - transform.position).magnitude;
+                if(closestDistance > distance)
+                {
+                    target = collider.transform;
+                    closestDistance = distance;
+                }
             }
         }
+
+        //TODO-See on forum said use spherecast instead so that it could take in less enemy
+        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //foreach(GameObject enemy in enemies)
+        //{
+        //    float distance = (enemy.transform.position - transform.position).magnitude;
+        //    if (closestDistance > distance && enemy.GetComponent<Renderer>().isVisible)
+        //    {
+        //        target = enemy.transform;
+        //        closestDistance = distance;
+        //    }
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D collider)
